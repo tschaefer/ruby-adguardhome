@@ -4,7 +4,7 @@ require 'adguardhome/agent'
 
 require 'adguardhome/access'
 require 'adguardhome/apple/mobileconfig'
-require 'adguardhome/blocked_services'
+require 'adguardhome/blockedservices'
 require 'adguardhome/clients'
 require 'adguardhome/common'
 require 'adguardhome/dhcp'
