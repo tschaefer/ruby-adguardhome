@@ -31,7 +31,7 @@ task :console do
   require 'pry-byebug'
   require 'pry-doc'
   require 'pry-theme'
-  require 'adguard_home'
+  require 'adguardhome'
 
   ARGV.clear
 
