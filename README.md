@@ -1,4 +1,4 @@
-# keycloak-admin
+# ruby-adguardhome
 
 Ruby AdGuardHome client library.
 
