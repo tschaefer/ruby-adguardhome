@@ -1,0 +1,27 @@
+---
+require:
+  - rubocop-rspec
+  - rubocop-rake
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1.x
+
+Style/NegatedIf:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  CountAsOne:
+    - 'array'
+    - 'hash'
+    - 'heredoc'
+  Max: 25
+
+RSpec/ExampleLength:
+  CountAsOne:
+    - 'array'
+    - 'hash'
+    - 'heredoc'
