@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.license     = 'MIT'
 
   spec.files                 = Dir['lib/**/*']
+  spec.bindir                = 'bin'
+  spec.executables           = ['adguardhomectl']
   spec.require_paths         = ['lib']
   spec.required_ruby_version = '>= 3.1'
 
@@ -27,5 +29,9 @@ Gem::Specification.new do |spec|
 
   spec.post_install_message = 'All your AdGuardHome are belong to us!'
 
+  spec.add_dependency 'clamp', '~> 1.3.2'
   spec.add_dependency 'httparty', '~> 0.21.0'
+  spec.add_dependency 'pastel', '~> 0.8.0'
+  spec.add_dependency 'tty-pager', '~> 0.14.0'
+  spec.add_dependency 'tty-table', '~> 0.12.0'
 end
