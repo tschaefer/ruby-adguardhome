@@ -29,7 +29,7 @@ module AdGuardHome
       #     '<string>'
       #   ]
       def set(attributes)
-        @agent.put('/blocked_services/set', params: { body: attributes.to_json })
+        @agent.post('/blocked_services/set', params: { body: attributes.to_json })
       end
 
       ##
