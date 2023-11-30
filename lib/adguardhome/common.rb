@@ -28,8 +28,8 @@ module AdGuardHome
       #   {
       #   recheck_now: '<boolean>'
       #   }
-      def version(attributes)
-        @agent.post('/version', params: { body: attributes.to_json })
+      def version(attributes = nil)
+        @agent.post('/version.json', params: { body: attributes&.to_json })
       end
 
       ##
