@@ -12,10 +12,14 @@ module AdGuardHome
           def execute
             configure
 
-            rules = AdGuardHome.filtering.status['user_rules']
-            rules.delete(rule)
+            begin
+              rules = AdGuardHome.filtering.status['user_rules']
+              rules.delete(rule)
 
-            AdGuardHome.filtering.set_rules(rules:)
+              AdGuardHome.filtering.set_rules(rules:)
+            rescue StandardError => e
+              bailout(e.message)
+            end
           end
         end
       end

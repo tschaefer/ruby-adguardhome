@@ -10,8 +10,12 @@ module AdGuardHome
           def execute
             configure
 
-            rules = AdGuardHome.filtering.status['user_rules']
-            puts rules.join("\n") if rules.any?
+            begin
+              rules = AdGuardHome.filtering.status['user_rules']
+              puts rules.join("\n") if rules.any?
+            rescue StandardError => e
+              bailout(e.message)
+            end
           end
         end
       end
