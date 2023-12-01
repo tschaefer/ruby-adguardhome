@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'tty-screen'
 require 'tty-pager'
 require 'tty-table'
 
@@ -23,10 +24,12 @@ module AdGuardHome
           end
 
           output = "#{render_table(stats)}#{legend(stats)}"
-          TTY::Pager.new(enabled: pager?).page(output)
+          pager(output)
 
           exit 0
         end
+
+        private
 
         def render_table(stats) # rubocop:disable Metrics/AbcSize
           objects = objects(stats)
@@ -63,6 +66,18 @@ module AdGuardHome
 
         def percentage(value, total)
           (value / total.to_f * 100).round(2)
+        end
+
+        def pager(content)
+          enabled = pager?
+
+          if pager? &&
+             (content.lines.size <= TTY::Screen.height &&
+              content.lines.map(&:size).max <= TTY::Screen.width)
+            enabled = false
+          end
+
+          TTY::Pager.new(enabled:).page(content)
         end
       end
     end
