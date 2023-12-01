@@ -8,7 +8,7 @@ module AdGuardHome
   module App
     class Command < AdGuardHome::App::BaseCommand
       subcommand 'stats', 'show stats', AdGuardHome::App::StatsCommand
-      subcommand 'filtering', 'filtering', AdGuardHome::App::FilteringCommand
+      subcommand 'filters', 'filters', AdGuardHome::App::FilteringCommand
     end
   end
 end

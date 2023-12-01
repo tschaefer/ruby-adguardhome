@@ -7,14 +7,14 @@ module AdGuardHome
     module Filtering
       module Custom
         class RemoveCommand < AdGuardHome::App::BaseCommand
-          parameter 'RULE', 'remove custom filter rule'
+          parameter 'RULE ...', 'custom filtering rule', attribute_name: :rules
 
           def execute
             configure
 
             begin
               rules = AdGuardHome.filtering.status['user_rules']
-              rules.delete(rule)
+              rules -= @rules
 
               AdGuardHome.filtering.set_rules(rules:)
             rescue StandardError => e
