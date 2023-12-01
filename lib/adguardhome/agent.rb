@@ -6,7 +6,7 @@ module AdGuardHome
   class Agent
     include HTTParty
     headers 'Content-Type' => 'application/json', Accept: 'application/json'
-    debug_output $stdout if ENV['ADGUARD_DEBUG']
+    debug_output $stdout if ENV['ADGUARDHOME_DEBUG']
 
     attr_accessor :base_url, :username, :password
 

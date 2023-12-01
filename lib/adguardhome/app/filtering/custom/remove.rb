@@ -7,7 +7,7 @@ module AdGuardHome
     module Filtering
       module Custom
         class RemoveCommand < AdGuardHome::App::BaseCommand
-          parameter 'RULE ...', 'custom filtering rule', attribute_name: :rules
+          parameter 'RULE ...', 'custom filtering rule', attribute_name: :rules, required: true
 
           def execute
             configure

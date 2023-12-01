@@ -7,7 +7,7 @@ module AdGuardHome
     module Filtering
       module Custom
         class AddCommand < AdGuardHome::App::BaseCommand
-          parameter 'RULE ...', 'custom filtering rules', attribute_name: :rules
+          parameter 'RULE ...', 'custom filtering rules', attribute_name: :rules, required: true
 
           def execute
             configure

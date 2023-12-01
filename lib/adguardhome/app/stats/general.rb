@@ -18,7 +18,7 @@ module AdGuardHome
           puts "DNS Queries: #{stats['num_dns_queries']}"
 
           percentage = percentage(stats['num_blocked_filtering'], stats['num_dns_queries'])
-          puts "Blocked by Filters: #{stats['num_blocked_filtering']} #{percentage}%"
+          puts "Blocked by Filters: #{stats['num_blocked_filtering']} / #{percentage}%"
 
           puts "Avg Processing Time: #{stats['avg_processing_time'].round(3)}s"
 
