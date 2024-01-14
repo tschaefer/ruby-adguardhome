@@ -6,26 +6,21 @@ module AdGuardHome
   module App
     module Stats
       class UpstreamsCommand < AdGuardHome::App::Stats::BaseCommand
-        def render_table(stats) # rubocop:disable Metrics/AbcSize
-          objects = objects(stats)
+        private
 
+        def body(stats, _queries)
           header = ['UPSTREAM', 'RESPONSES', 'AVERAGE TIME']
-          rows = objects.map do |object|
+          rows = stats.map do |object|
             values = object.values.flatten
             [object.keys.first, values.first, "#{values.last.round(3)} s"]
           end
-          table = TTY::Table.new(header:, rows:)
 
-          table.render(multiline: true, width: 2**16) do |renderer|
-            renderer.border do
-              mid '─'
-              mid_mid '─'
-              center ' '
-            end
-          end
+          [header, rows]
         end
 
-        def objects(stats)
+        def fetch # rubocop:disable Metrics/AbcSize
+          stats = AdGuardHome.stats.get
+
           resp = stats['top_upstreams_responses']
           avg = stats['top_upstreams_avg_time']
 
@@ -37,7 +32,7 @@ module AdGuardHome
             objects << { key => values }
           end
 
-          objects
+          [objects, stats['num_dns_queries']]
         end
       end
     end

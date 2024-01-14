@@ -15,6 +15,13 @@ module AdGuardHome
         exit 0
       end
 
+      def initialize(*args)
+        super(*args)
+
+        configure
+        @object = nil
+      end
+
       private
 
       def bailout(message)
@@ -26,14 +33,24 @@ module AdGuardHome
         file = ENV['ADGUARDHOMERC'] || File.join(Dir.home, '.adguardhomerc')
         begin
           settings = JSON.load_file(file)
+
+          AdGuardHome.configure do |config|
+            config.base_url = settings['url']
+            config.username = settings['username']
+            config.password = settings['password']
+          end
         rescue StandardError => e
           bailout(e.message)
         end
+      end
 
-        AdGuardHome.configure do |config|
-          config.base_url = settings['url']
-          config.username = settings['username']
-          config.password = settings['password']
+      def object(&)
+        return @object if @object
+
+        begin
+          @object = yield
+        rescue StandardError => e
+          bailout(e.message)
         end
       end
     end
